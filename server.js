@@ -1,11 +1,5 @@
-const express = require('express');
 const mysql = require('mysql2');
-
-const PORT = 3001;
-const app = express();
-
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+const inquirer = require('inquirer');
 
 const db = mysql.createConnection(
     {
@@ -15,4 +9,4 @@ const db = mysql.createConnection(
       database: 'employee_db'
     },
     console.log(`Connected to the employee_db database.`)
-)
+);
