@@ -1,0 +1,11 @@
+{
+    "name": "employee-tracker",
+    "version": "1.0.0",
+    "description": "Employee Tracker Database",
+    "main": "server.js",
+    "author": "Samantha Rose",
+    "license": "MIT",
+    "dependencies": {
+        "inquirer": "^8.2.6"
+    }
+}
