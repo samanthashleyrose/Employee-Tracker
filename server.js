@@ -11,7 +11,7 @@ const db = mysql.createConnection(
     database: 'employee_db'
   },
   console.log(`Connected to the employee_db database.`)
-);
+).promise();
 
 // Opening list of options for user to select from
 const options = [
@@ -83,7 +83,80 @@ function viewAllEmployees() {
       return;
     }
     console.table(results);
-    // init();
-})};
+    init();
+  })
+};
+
+// Function to Add Employee
+function addEmployee() {
+  const roles = getRoles();
+  const managers = getManagers();
+
+  const questions = [
+    {
+      type: 'input',
+      message: 'Enter employees first name',
+      name: 'firstNameForNewEmployee'
+    },
+    {
+      type: 'input',
+      message: 'Enter employees last name',
+      name: 'lastNameForNewEmployee'
+    },
+    {
+      type: 'list',
+      message: 'Select the employees role:',
+      name: 'roleForNewEmployee',
+      choices: roles
+    },
+    {
+      type: 'list',
+      message: 'Select the employees manager:',
+      name: 'managerForNewEmployee',
+      choices: managers
+    }
+  ];
+  inquirer
+    .prompt(questions)
+    .then((answers) => {
+      // Insert the employee into the database
+      const sql = 'INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)';
+      const values = [
+        answers.firstName,
+        answers.lastName,
+        answers.roleId,
+        answers.managerId,
+      ];
+      db.query(sql, values, (error) => {
+        if (error) {
+          console.error(error);
+          return;
+        }
+
+        console.log("Employee added successfully");
+        init();
+      })
+    });
+};
+
+// Helper function to get roles
+function getRoles() {
+  return db.query('SELECT * FROM roles').then((results) => {
+    return results.map((role) => ({ 
+        name: role.title, 
+        value: role.id 
+      }));
+  });
+};
+
+// Helper function to get managers
+function getManagers() {
+  return db.query('SELECT * FROM employee').then((results) => {
+    return results.map((employee) => ({
+      name: `${employee.first_name} ${employee.last_name}`,
+      value: employee.id,
+    }));
+  });
+};
 
 init();
