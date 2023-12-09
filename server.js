@@ -68,7 +68,15 @@ function init() {
 
 // Function to View All Employees
 function viewAllEmployees() {
-  const query = 'SELECT * FROM employee;';
+  const query = `
+  SELECT 
+    employee.id, 
+    employee.first_name, 
+    employee.last_name, 
+    employee.role_id, 
+    CONCAT(manager.first_name, ' ', manager.last_name) AS manager
+  FROM employee
+  LEFT JOIN employee manager ON employee.manager_id = manager.id;`;
   db.query(query, (err, results) => {
     if (err) {
       console.error(err);
