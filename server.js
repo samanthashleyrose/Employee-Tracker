@@ -1,6 +1,8 @@
+// Requires
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
 
+// Connect to database
 const db = mysql.createConnection(
   {
     host: 'localhost',
@@ -11,6 +13,7 @@ const db = mysql.createConnection(
   console.log(`Connected to the employee_db database.`)
 );
 
+// Opening list of options for user to select from
 const options = [
   {
     type: 'list',
@@ -28,3 +31,18 @@ const options = [
     ]
   },
 ];
+
+// Function to start inquirer prompts and call functions associated with users selections
+function init() {
+  inquirer
+  .prompt(options)
+  .then((answer) => {
+    switch(answer.action) {
+      case 'View All Employees':
+        viewAllEmployees();
+        break;
+    }
+  })
+};
+
+init();
