@@ -5,10 +5,10 @@ USE employee_db;
 
 CREATE TABLE department (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(30)
+    names VARCHAR(30)
 );
 
-CREATE TABLE role (
+CREATE TABLE roles (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(30),
     salary DECIMAL,
@@ -25,6 +25,6 @@ CREATE TABLE employee (
     role_id INT NOT NULL,
     manager_id INT,
     FOREIGN KEY (role_id)
-    REFERENCES role(id)
+    REFERENCES roles(id)
     ON DELETE SET NULL
 );
