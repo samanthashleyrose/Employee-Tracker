@@ -17,8 +17,8 @@ const db = mysql.createConnection(
 const options = [
   {
     type: 'list',
-    message: "Select a license:",
-    name: 'license',
+    message: "What would you like to do:",
+    name: 'options',
     choices: [
       'View All Employees',
       'Add Employee',
@@ -62,8 +62,18 @@ function init() {
         case 'Quit':
           quit();
           break;
-      }
-    })
+      };
+    });
+};
+
+// Function to View All Employees
+function viewAllEmployees() {
+  const query = 'SELECT * FROM employee';
+  connection.query(query, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+    init();
+  });
 };
 
 init();
