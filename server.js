@@ -35,14 +35,35 @@ const options = [
 // Function to start inquirer prompts and call functions associated with users selections
 function init() {
   inquirer
-  .prompt(options)
-  .then((answer) => {
-    switch(answer.action) {
-      case 'View All Employees':
-        viewAllEmployees();
-        break;
-    }
-  })
+    .prompt(options)
+    .then((answer) => {
+      switch (answer.action) {
+        case 'View All Employees':
+          viewAllEmployees();
+          break;
+        case 'Add Employee':
+          addEmployee();
+          break;
+        case 'Update Employee Role':
+          updateEmployeeRole();
+          break;
+        case 'View All Roles':
+          viewAllRoles();
+          break;
+        case 'Add Role':
+          addRole();
+          break;
+        case 'View All Departments':
+          viewAllDepartments();
+          break;
+        case 'Add Departments':
+          addDepartments();
+          break;
+        case 'Quit':
+          quit();
+          break;
+      }
+    })
 };
 
 init();
