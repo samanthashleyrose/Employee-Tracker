@@ -37,7 +37,7 @@ function init() {
   inquirer
     .prompt(options)
     .then((answer) => {
-      switch (answer.action) {
+      switch (answer.options) {
         case 'View All Employees':
           viewAllEmployees();
           break;
@@ -68,12 +68,14 @@ function init() {
 
 // Function to View All Employees
 function viewAllEmployees() {
-  const query = 'SELECT * FROM employee';
-  connection.query(query, (err, res) => {
-    if (err) throw err;
-    console.table(res);
-    init();
-  });
-};
+  const query = 'SELECT * FROM employee;';
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    console.table(results);
+    // init();
+})};
 
 init();
