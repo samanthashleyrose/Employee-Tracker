@@ -122,10 +122,10 @@ function addEmployee() {
       // Insert the employee into the database
       const sql = 'INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)';
       const values = [
-        answers.firstName,
-        answers.lastName,
-        answers.roleId,
-        answers.managerId,
+        answers.firstNameForNewEmployee,
+        answers.lastNameForNewEmployee,
+        answers.roleForNewEmployee,
+        answers.managerForNewEmployee,
       ];
       db.query(sql, values, (error) => {
         if (error) {
@@ -148,7 +148,7 @@ function updateEmployeeRole() {
     {
       type: 'list',
       message: "Select the employees you'd like to update:",
-      name: 'updatesToEmployee',
+      name: 'employeeToUpdate',
       choices: employees
     },
     {
@@ -176,7 +176,26 @@ function updateEmployeeRole() {
         init();
       })
     });
-}
+};
+
+// Function to Update Employee Role
+function viewAllRoles() {
+  const query = `
+  SELECT 
+    roles.id, 
+    roles.title, 
+    roles.salary, 
+    roles.department_id 
+  FROM roles`;
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    console.table(results);
+    init();
+  })
+};
 
 // Helper function to get list of roles
 function getRoles() {
