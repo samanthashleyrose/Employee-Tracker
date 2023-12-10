@@ -261,6 +261,12 @@ async function addDepartment() {
   }
 };
 
+// Function to Quit
+function quit() {
+  console.log('Goodbye!');
+  process.exit();
+};
+
 // Helper function to get list of roles
 function getRoles() {
   return db.query('SELECT * FROM roles').then((results) => {
