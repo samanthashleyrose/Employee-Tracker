@@ -31,6 +31,8 @@ The following steps outline the usage of the Employee Tracker Database. Ensure t
 
 1. Right click on the server.js file and select "Open in Integrated Terminal". Run the command `node server.js` then select what action you'd like to do.
 
+2. Any actions labeled View will show you the corresponding table from the employee database.Any actions labeled Add/Update will prompt you to answer additional questions to update the database.
+
 ## How to Contribute
 
 ### Thank you for your interest and support!
