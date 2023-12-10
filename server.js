@@ -208,13 +208,17 @@ function getManagers() {
 };
 
 // Helper function to get list of employees
-function getEmployees() {
-  return db.query('SELECT * FROM employee').then((results) => {
+async function getEmployees() {
+  try {
+    const [results, _] = await db.query('SELECT * FROM employee');
     return results.map((employee) => ({
       name: `${employee.first_name} ${employee.last_name}`,
       value: employee.id,
     }));
-  });
-};
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
 
 init();
