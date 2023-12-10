@@ -1,4 +1,4 @@
-# Employee-Tracker
+# Employee Tracker Database
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 ## Description
@@ -14,6 +14,16 @@ A command-line application from scratch to manage a company's employee database,
 - [License](#license)
 
 ## Installation
+
+In order to use the Employee Tracker Database, it is necessary to have a code editor, such as Visual Studio Code (VSCode), and Node.js installed on your system.
+
+1. Begin by installing Node.js on your computer's terminal/command-line. For detailed installation instructions, vist Node.js.org.
+
+2. Initiate the cloning process from the GitHub repository by selecting "Code." Copy the SSH link then execute the `git clone <paste SSH link>` command in your terminal/command-line. Next, open the cloned project in your preferred code editor.
+
+3. Verify the installation of npm, which usually comes bundled with Node.js. Execute the command `npm -v` in the integrated terminal to confirm that you have the latest version downloaded. If npm is not installed, run the command `npm i` before continuing.
+
+4. In addition run the command `npm install inquirer@8`. For the Employee Tracker Database to function properly, you must have inquirer version 8.2.6 installed.
 
 ## Usage
 
