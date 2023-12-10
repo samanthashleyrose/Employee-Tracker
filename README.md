@@ -27,6 +27,10 @@ In order to use the Employee Tracker Database, it is necessary to have a code ed
 
 ## Usage
 
+The following steps outline the usage of the Employee Tracker Database. Ensure that you have completed all installation requirements before proceeding with the usage instructions.
+
+1. Right click on the server.js file and select "Open in Integrated Terminal". Run the command `node server.js` then select what action you'd like to do.
+
 ## How to Contribute
 
 ### Thank you for your interest and support!
