@@ -133,24 +133,73 @@ function addEmployee() {
           return;
         }
 
-        console.log("Employee added successfully");
+        console.log("Employee successfully added");
         init();
       })
     });
 };
 
-// Helper function to get roles
+// Function to Update Employee Role
+function updateEmployeeRole() {
+  const employees = getEmployees();
+  const roles = getRoles();
+
+  const questions = [
+    {
+      type: 'list',
+      message: "Select the employees you'd like to update:",
+      name: 'updatesToEmployee',
+      choices: employees
+    },
+    {
+      type: 'list',
+      message: 'Select the employees new role:',
+      name: 'employeesNewRole',
+      choices: roles
+    }
+  ];
+
+  inquirer
+    .prompt(questions)
+    .then((answers) => {
+      // Update the employee's role in the database
+      const sql = 'UPDATE employee SET role_id = ? WHERE id = ?';
+      const values = [answers.newRoleId, answers.employeeToUpdate];
+
+      db.query(sql, values, (error) => {
+        if (error) {
+          console.error(error);
+          return;
+        }
+
+        console.log('Employee role successfully updated');
+        init();
+      })
+    });
+}
+
+// Helper function to get list of roles
 function getRoles() {
   return db.query('SELECT * FROM roles').then((results) => {
-    return results.map((role) => ({ 
-        name: role.title, 
-        value: role.id 
-      }));
+    return results.map((role) => ({
+      name: role.title,
+      value: role.id
+    }));
   });
 };
 
-// Helper function to get managers
+// Helper function to get list of managers
 function getManagers() {
+  return db.query('SELECT * FROM employee').then((results) => {
+    return results.map((employee) => ({
+      name: `${employee.first_name} ${employee.last_name}`,
+      value: employee.id,
+    }));
+  });
+};
+
+// Helper function to get list of employees
+function getEmployees() {
   return db.query('SELECT * FROM employee').then((results) => {
     return results.map((employee) => ({
       name: `${employee.first_name} ${employee.last_name}`,
