@@ -56,8 +56,8 @@ function init() {
         case 'View All Departments':
           viewAllDepartments();
           break;
-        case 'Add Departments':
-          addDepartments();
+        case 'Add Department':
+          addDepartment();
           break;
         case 'Quit':
           quit();
@@ -230,6 +230,31 @@ async function viewAllDepartments() {
     const query = 'SELECT * FROM department';
     const [results, _] = await db.query(query);
     console.table(results);
+    init();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// Function to Add Department
+async function addDepartment() {
+  try {
+    const question = [
+      {
+        type: 'input',
+        message: 'Enter the department name:',
+        name: 'departmentName'
+      }
+    ];
+
+    const answer = await inquirer.prompt(question);
+
+    // Insert the department into the database
+    const sql = 'INSERT INTO department (names) VALUES (?)';
+    const values = [answer.departmentName];
+    await db.query(sql, values);
+
+    console.log("Department successfully added");
     init();
   } catch (error) {
     console.error(error);
