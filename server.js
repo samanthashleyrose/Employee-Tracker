@@ -224,6 +224,18 @@ async function addRole() {
   }
 };
 
+// Function to View All Departments
+async function viewAllDepartments() {
+  try {
+    const query = 'SELECT * FROM department';
+    const [results, _] = await db.query(query);
+    console.table(results);
+    init();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 // Helper function to get list of roles
 function getRoles() {
   return db.query('SELECT * FROM roles').then((results) => {
