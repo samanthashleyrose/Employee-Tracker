@@ -10,9 +10,9 @@ SELECT * FROM department;
 -- Get employees with their roles and departments
 SELECT 
     employee.id,
-    employee.first_name,
-    employee.last_name,
-    roles.title AS role_title,
+    CONCAT(employee.first_name, ' ', employee.last_name) AS employee_name,
+    roles.title AS job_title,
+    roles.salary,
     department.names AS department,
     CONCAT(manager.first_name, ' ', manager.last_name) AS manager
 FROM employee

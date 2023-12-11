@@ -73,8 +73,7 @@ async function viewAllEmployees() {
     const query = `
     SELECT 
       employee.id, 
-      employee.first_name, 
-      employee.last_name, 
+      CONCAT(employee.first_name, ' ', employee.last_name) AS employee_name, 
       roles.title AS job_title,
       roles.salary,
       department.names AS department,
