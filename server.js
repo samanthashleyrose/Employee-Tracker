@@ -11,7 +11,7 @@ const db = mysql.createConnection(
     password: '',
     database: 'employee_db'
   },
-  console.log(`Connected to the employee_db database.`)
+  console.log(`You're now connected to the employee_db database.`)
 ).promise();
 
 // Opening list of options for user to select from
