@@ -3,7 +3,7 @@
 
 ## Description
 
-A command-line application from scratch to manage a company's employee database, using Node.js, Inquirer, and MySQL.
+The Employee Tracker Database CLI is a command-line application built with Node.js, Inquirer, and MySQL. This tool is designed to streamline and simplify the management of a company's employee database, providing a user-friendly interface for efficient data handling. The CLI employs Inquirer to create an intuitive and interactive command-line interface, making it easy for users to navigate and perform various operations on the employee database.
 
 ## Table of Contents
 
@@ -21,17 +21,25 @@ In order to use the Employee Tracker Database, it is necessary to have a code ed
 
 2. Initiate the cloning process from the GitHub repository by selecting "Code." Copy the SSH link then execute the `git clone <paste SSH link>` command in your terminal/command-line. Next, open the cloned project in your preferred code editor.
 
-3. Verify the installation of npm, which usually comes bundled with Node.js. Execute the command `npm -v` in the integrated terminal to confirm that you have the latest version downloaded. If npm is not installed, run the command `npm i` before continuing.
+3. Verify the installation of npm, which usually comes bundled with Node.js. Execute the command `npm -v` in the integrated terminal to confirm that you have the latest version downloaded. If npm is not installed, run the command `npm i` before continuing to install dependencies.
 
-4. In addition run the command `npm install inquirer@8`. For the Employee Tracker Database to function properly, you must have inquirer version 8.2.6 installed.
+4. In the server.js file, make sure to update const db to contain you MyDQL Database Credentials. Specifically, replace: `host`, `user`, `password`, and `database` with your necessary information.
 
 ## Usage
 
 The following steps outline the usage of the Employee Tracker Database. Ensure that you have completed all installation requirements before proceeding with the usage instructions.
 
-1. Right click on the server.js file and select "Open in Integrated Terminal". Run the command `node server.js` then select what action you'd like to do.
+1. Right click on the server.js file and select "Open in Integrated Terminal". Run the application with the command `node server.js` then select what action you'd like to do.
 
-2. Any actions labeled View will show you the corresponding table from the employee database.Any actions labeled Add/Update will prompt you to answer additional questions to update the database.
+2. Any actions labeled 'View' will show you the corresponding table from the employee database. Any actions labeled 'Add/Update' will prompt you to answer additional questions to change the database.
+
+## Features
+
+**Database Integration:** Utilizing the power of MySQL, this application connects to your company's database, allowing you to perform CRUD (Create, Read, Update, Delete) operations on employee records with ease.
+
+**Employee Management:** Efficiently add new employees, view existing employee details, and update information.
+
+**Department and Role Management:** Organize your workforce by managing departments and roles effortlessly. Add new departments, create roles, and associate employees with specific roles.
 
 ## How to Contribute
 
