@@ -66,7 +66,8 @@ function init() {
     });
 };
 
-// Function to View All Employees
+//-------------INQUIRER FUNCTIONS-------------//
+// View All Employees
 async function viewAllEmployees() {
   try {
     const query = `
@@ -81,7 +82,7 @@ async function viewAllEmployees() {
     FROM employee
     LEFT JOIN employee manager ON employee.manager_id = manager.id
     INNER JOIN roles ON employee.role_id = roles.id
-    INNER JOIN department ON roles.department_id = department.id;`;
+    INNER JOIN department ON roles.department_id = department.id`;
     const [results] = await db.query(query);
     console.table(results);
     init();
@@ -90,7 +91,7 @@ async function viewAllEmployees() {
   }
 };
 
-// Function to Add Employee
+// Add Employee
 async function addEmployee() {
   try {
     const roles = await getRoles();
@@ -139,10 +140,10 @@ async function addEmployee() {
   }
 };
 
-// Function to Update Employee Role
+// Update Employee Role
 async function updateEmployee() {
   let employeeToUpdate;
-  
+
   try {
     const employees = await getEmployees();
     const roles = await getRoles();
@@ -167,6 +168,7 @@ async function updateEmployee() {
     const { infoToUpdate } = await inquirer.prompt(questions);
 
     switch (infoToUpdate) {
+      // UPDATE EMPLOYEE ROLE
       case 'Role':
         const { newRoleId } = await inquirer.prompt([
           {
@@ -179,6 +181,7 @@ async function updateEmployee() {
         await updateEmployeeRole(employeeToUpdate, newRoleId);
         console.log('Employee role successfully updated');
         break;
+      // UPDATE EMPLOYEE SALARY
       case 'Salary':
         const { newSalary } = await inquirer.prompt([
           {
@@ -190,6 +193,7 @@ async function updateEmployee() {
         await updateEmployeeSalary(employeeToUpdate, newSalary);
         console.log('Employee salary successfully updated');
         break;
+      // UPDATE EMPLOYEE DEPARTMENT
       case 'Department':
         const { newDepartmentId } = await inquirer.prompt([
           {
@@ -202,6 +206,7 @@ async function updateEmployee() {
         await updateEmployeeDepartment(employeeToUpdate, newDepartmentId);
         console.log('Employee department successfully updated');
         break;
+      // UPDATE EMPLOYEE MANAGER
       case 'Manager':
         const { newManagerId } = await inquirer.prompt([
           {
@@ -224,7 +229,7 @@ async function updateEmployee() {
   init();
 };
 
-// Function to View All Roles
+// View All Roles
 async function viewAllRoles() {
   try {
     const query = `
@@ -242,7 +247,7 @@ async function viewAllRoles() {
   }
 };
 
-// Function to Add Role
+// Add Role
 async function addRole() {
   try {
     const departments = await getDepartments();
@@ -279,7 +284,7 @@ async function addRole() {
   }
 };
 
-// Function to View All Departments
+// View All Departments
 async function viewAllDepartments() {
   try {
     const query = 'SELECT * FROM department';
@@ -291,7 +296,7 @@ async function viewAllDepartments() {
   }
 };
 
-// Function to Add Department
+// Add Department
 async function addDepartment() {
   try {
     const question = [
@@ -316,13 +321,14 @@ async function addDepartment() {
   }
 };
 
-// Function to Quit
+// Quit
 function quit() {
   console.log('Goodbye!');
   process.exit();
 };
 
-// Helper function to get list of roles
+//-------------HELPER FUNCTIONS-------------//
+// Get list of roles
 async function getRoles() {
   try {
     const results = await db.query('SELECT * FROM roles');
@@ -336,7 +342,7 @@ async function getRoles() {
   }
 };
 
-// Helper function to get list of managers
+// Get list of managers
 async function getManagers() {
   try {
     const results = await db.query('SELECT * FROM employee');
@@ -358,7 +364,7 @@ async function getManagers() {
   }
 };
 
-// Helper function to get list of employees
+// Get list of employees
 async function getEmployees() {
   try {
     const [results, _] = await db.query('SELECT * FROM employee');
@@ -372,7 +378,7 @@ async function getEmployees() {
   }
 };
 
-// Helper function to get list of departments
+// Get list of departments
 async function getDepartments() {
   try {
     const query = 'SELECT * FROM department';
@@ -388,7 +394,7 @@ async function getDepartments() {
   }
 };
 
-// Helper function to Update Employee Role
+// Update Employee Role
 async function updateEmployeeRole(employeeId, newRoleId) {
   try {
     const sql = 'UPDATE employee SET role_id = ? WHERE id = ?';
@@ -399,7 +405,7 @@ async function updateEmployeeRole(employeeId, newRoleId) {
   }
 };
 
-// Helper function to Update Employee Salary
+// Update Employee Salary
 async function updateEmployeeSalary(employeeId, newSalary) {
   try {
     const sql = 'UPDATE employee SET salary = ? WHERE id = ?';
@@ -410,7 +416,7 @@ async function updateEmployeeSalary(employeeId, newSalary) {
   }
 };
 
-// Helper function to Update Employee Department
+// Update Employee Department
 async function updateEmployeeDepartment(employeeId, newDepartmentId) {
   try {
     const sql = 'UPDATE employee SET department_id = ? WHERE id = ?';
@@ -421,7 +427,7 @@ async function updateEmployeeDepartment(employeeId, newDepartmentId) {
   }
 };
 
-// Helper function to Update Employee Manager
+// Update Employee Manager
 async function updateEmployeeManager(employeeId, newManagerId) {
   try {
     const sql = 'UPDATE employee SET manager_id = ? WHERE id = ?';
