@@ -53,11 +53,17 @@ The following steps outline the usage of the Employee Tracker Database. Ensure t
 
 #### Technologies Used:
 <li><a href="https://nodejs.org/en/">Node.js</a></li>
+<li><a href="https://chat.openai.com/">ChatGPT</a></li>
+<li><a href="https://www.npmjs.com/package/figlet">NPM - figlet</a></li>
 <li><a href="https://www.npmjs.com/package/inquirer/v/8.2.4?activeTab=readme#prompt">NPM - Inquirer</a></li>
 <li><a href="https://www.npmjs.com/package/mysql2">NPM - MySQL2</a></li>
-<li><a href="https://chat.openai.com/">ChatGPT</a></li>
 
 #### Documentation Used:
+<li><a href="https://patorjk.com/software/taag/#p=display&v=1&f=Big&t=Employee%20Database">Text to ASCII Art Generator</a></li>
+<li><a href="https://www.w3schools.com/sql/sql_select.asp">W3Schools JavaScript Errors</a></li>
+<li><a href="https://www.w3schools.com/sql/sql_select.asp">W3Schools SQL SELECT Statement</a></li>
+<li><a href="https://www.w3schools.com/js/js_switch.asp">W3Schools JavaScript Switch Statement</a></li>
+<li><a href="https://www.youtube.com/watch?v=m9CQxR0AfiQ">Thomas and Friends SQL Employee Tracker | UofT Coding Bootcamp: Module 12</a></li>
 
 ## License
 
