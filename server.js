@@ -1,6 +1,7 @@
 // Requires
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
+const figlet = require('figlet');
 
 // Connect to database
 const db = mysql.createConnection(
@@ -32,8 +33,24 @@ const options = [
   },
 ];
 
-// Function to start inquirer prompts and call functions associated with users selections
+let titleDisplayed = true; // Checks if the title has been displayed
+
+// Function to display header, start inquirer prompts, and call functions associated with users selections
 function init() {
+  // Displays Employee Database Header in terminal only if it hasn't been displayed yet
+  if (titleDisplayed) {
+    figlet('Employee Database', function (err, data) {
+      // Populates the header
+      console.log(data);
+      titleDisplayed = false;
+      promptUser();
+    });
+  } else {
+    promptUser();
+  }
+};
+// Function to handle inquirer prompts and user selections
+function promptUser() {
   inquirer
     .prompt(options)
     .then((answer) => {
@@ -62,7 +79,7 @@ function init() {
         case 'Quit':
           quit();
           break;
-      };
+      }
     });
 };
 

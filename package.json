@@ -6,6 +6,7 @@
     "author": "Samantha Rose",
     "license": "MIT",
     "dependencies": {
+        "figlet": "^1.7.0",
         "inquirer": "^8.2.6",
         "mysql2": "^2.2.5"
     }
