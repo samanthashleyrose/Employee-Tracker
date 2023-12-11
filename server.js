@@ -272,23 +272,31 @@ function quit() {
 };
 
 // Helper function to get list of roles
-function getRoles() {
-  return db.query('SELECT * FROM roles').then((results) => {
-    return results.map((role) => ({
+async function getRoles() {
+  try {
+    const results = await db.query('SELECT * FROM roles');
+    return results[0].map((role) => ({
       name: role.title,
       value: role.id
     }));
-  });
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 };
 
 // Helper function to get list of managers
-function getManagers() {
-  return db.query('SELECT * FROM employee').then((results) => {
-    return results.map((employee) => ({
+async function getManagers() {
+  try {
+    const results = await db.query('SELECT * FROM employee');
+    return results[0].map((employee) => ({
       name: `${employee.first_name} ${employee.last_name}`,
       value: employee.id,
     }));
-  });
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 };
 
 // Helper function to get list of employees
@@ -303,7 +311,7 @@ async function getEmployees() {
     console.error(error);
     return [];
   }
-}
+};
 
 // Helper function to get list of departments
 async function getDepartments() {
