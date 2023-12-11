@@ -55,26 +55,26 @@ function promptUser() {
     .prompt(options)
     .then((answer) => {
       switch (answer.options) {
+        case 'View All Departments':
+          viewAllDepartments();
+          break;
+        case 'View All Roles':
+          viewAllRoles();
+          break;
         case 'View All Employees':
           viewAllEmployees();
+          break;
+        case 'Add Department':
+          addDepartment();
+          break;
+        case 'Add Role':
+          addRole();
           break;
         case 'Add Employee':
           addEmployee();
           break;
         case 'Update Employee':
           updateEmployee();
-          break;
-        case 'View All Roles':
-          viewAllRoles();
-          break;
-        case 'Add Role':
-          addRole();
-          break;
-        case 'View All Departments':
-          viewAllDepartments();
-          break;
-        case 'Add Department':
-          addDepartment();
           break;
         case 'Quit':
           quit();
@@ -84,6 +84,37 @@ function promptUser() {
 };
 
 //-------------INQUIRER FUNCTIONS-------------//
+
+// View All Departments
+async function viewAllDepartments() {
+  try {
+    const query = 'SELECT * FROM department';
+    const [results, _] = await db.query(query);
+    console.table(results);
+    init();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// View All Roles
+async function viewAllRoles() {
+  try {
+    const query = `
+    SELECT 
+      roles.id, 
+      roles.title, 
+      roles.salary, 
+      roles.department_id 
+    FROM roles`;
+    const [results, _] = await db.query(query);
+    console.table(results);
+    init();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 // View All Employees
 async function viewAllEmployees() {
   try {
@@ -101,6 +132,68 @@ async function viewAllEmployees() {
     INNER JOIN department ON roles.department_id = department.id`;
     const [results] = await db.query(query);
     console.table(results);
+    init();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// Add Department
+async function addDepartment() {
+  try {
+    const question = [
+      {
+        type: 'input',
+        message: 'Enter the department name:',
+        name: 'departmentName'
+      }
+    ];
+
+    const answer = await inquirer.prompt(question);
+
+    // Insert the department into the database
+    const sql = 'INSERT INTO department (names) VALUES (?)';
+    const values = [answer.departmentName];
+    await db.query(sql, values);
+
+    console.log("Department successfully added");
+    init();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// Add Role
+async function addRole() {
+  try {
+    const departments = await getDepartments();
+
+    const questions = [
+      {
+        type: 'input',
+        message: 'Enter the role title:',
+        name: 'roleTitle'
+      },
+      {
+        type: 'input',
+        message: 'Enter the role salary:',
+        name: 'roleSalary'
+      },
+      {
+        type: 'list',
+        message: 'Select the department for the role:',
+        name: 'roleDepartment',
+        choices: departments
+      }
+    ];
+    const answers = await inquirer.prompt(questions);
+
+    // Insert the role into the database
+    const sql = 'INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)';
+    const values = [answers.roleTitle, answers.roleSalary, answers.roleDepartment];
+    await db.query(sql, values);
+
+    console.log("Role successfully added");
     init();
   } catch (error) {
     console.error(error);
@@ -243,98 +336,6 @@ async function updateEmployee() {
     console.error(error);
   }
   init();
-};
-
-// View All Roles
-async function viewAllRoles() {
-  try {
-    const query = `
-    SELECT 
-      roles.id, 
-      roles.title, 
-      roles.salary, 
-      roles.department_id 
-    FROM roles`;
-    const [results, _] = await db.query(query);
-    console.table(results);
-    init();
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-// Add Role
-async function addRole() {
-  try {
-    const departments = await getDepartments();
-
-    const questions = [
-      {
-        type: 'input',
-        message: 'Enter the role title:',
-        name: 'roleTitle'
-      },
-      {
-        type: 'input',
-        message: 'Enter the role salary:',
-        name: 'roleSalary'
-      },
-      {
-        type: 'list',
-        message: 'Select the department for the role:',
-        name: 'roleDepartment',
-        choices: departments
-      }
-    ];
-    const answers = await inquirer.prompt(questions);
-
-    // Insert the role into the database
-    const sql = 'INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)';
-    const values = [answers.roleTitle, answers.roleSalary, answers.roleDepartment];
-    await db.query(sql, values);
-
-    console.log("Role successfully added");
-    init();
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-// View All Departments
-async function viewAllDepartments() {
-  try {
-    const query = 'SELECT * FROM department';
-    const [results, _] = await db.query(query);
-    console.table(results);
-    init();
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-// Add Department
-async function addDepartment() {
-  try {
-    const question = [
-      {
-        type: 'input',
-        message: 'Enter the department name:',
-        name: 'departmentName'
-      }
-    ];
-
-    const answer = await inquirer.prompt(question);
-
-    // Insert the department into the database
-    const sql = 'INSERT INTO department (names) VALUES (?)';
-    const values = [answer.departmentName];
-    await db.query(sql, values);
-
-    console.log("Department successfully added");
-    init();
-  } catch (error) {
-    console.error(error);
-  }
 };
 
 // Quit
