@@ -22,7 +22,7 @@ const options = [
     choices: [
       'View All Employees',
       'Add Employee',
-      'Update Employee Role',
+      'Update Employee',
       'View All Roles',
       'Add Role',
       'View All Departments',
@@ -44,8 +44,8 @@ function init() {
         case 'Add Employee':
           addEmployee();
           break;
-        case 'Update Employee Role':
-          updateEmployeeRole();
+        case 'Update Employee':
+          updateEmployee();
           break;
         case 'View All Roles':
           viewAllRoles();
@@ -140,10 +140,14 @@ async function addEmployee() {
 };
 
 // Function to Update Employee Role
-async function updateEmployeeRole() {
+async function updateEmployee() {
+  let employeeToUpdate;
+  
   try {
     const employees = await getEmployees();
     const roles = await getRoles();
+    const departments = await getDepartments();
+    const managers = await getManagers();
 
     const questions = [
       {
@@ -154,23 +158,70 @@ async function updateEmployeeRole() {
       },
       {
         type: 'list',
-        message: 'Select the employees new role:',
-        name: 'employeesNewRole',
-        choices: roles
+        message: 'Select the information to update:',
+        name: 'infoToUpdate',
+        choices: ['Role', 'Salary', 'Department', 'Manager']
       }
     ];
 
-    const answers = await inquirer.prompt(questions);
-    // Update the employee's role in the database
-    const sql = 'UPDATE employee SET role_id = ? WHERE id = ?';
-    const values = [answers.newRoleId, answers.employeeToUpdate];
-    await db.query(sql, values)
+    const { infoToUpdate } = await inquirer.prompt(questions);
 
-    console.log('Employee role successfully updated');
-    init();
+    switch (infoToUpdate) {
+      case 'Role':
+        const { newRoleId } = await inquirer.prompt([
+          {
+            type: 'list',
+            message: 'Select the employees new role:',
+            name: 'newRoleId',
+            choices: roles
+          }
+        ]);
+        await updateEmployeeRole(employeeToUpdate, newRoleId);
+        console.log('Employee role successfully updated');
+        break;
+      case 'Salary':
+        const { newSalary } = await inquirer.prompt([
+          {
+            type: 'input',
+            message: 'Enter the employees new salary:',
+            name: 'newSalary'
+          }
+        ]);
+        await updateEmployeeSalary(employeeToUpdate, newSalary);
+        console.log('Employee salary successfully updated');
+        break;
+      case 'Department':
+        const { newDepartmentId } = await inquirer.prompt([
+          {
+            type: 'list',
+            message: 'Select the employees new department:',
+            name: 'newDepartmentId',
+            choices: departments
+          }
+        ]);
+        await updateEmployeeDepartment(employeeToUpdate, newDepartmentId);
+        console.log('Employee department successfully updated');
+        break;
+      case 'Manager':
+        const { newManagerId } = await inquirer.prompt([
+          {
+            type: 'list',
+            message: 'Select the employees new manager:',
+            name: 'newManagerId',
+            choices: managers
+          }
+        ]);
+        await updateEmployeeManager(employeeToUpdate, newManagerId);
+        console.log('Employee manager successfully updated');
+        break;
+      default:
+        console.log('Invalid selection');
+        break;
+    }
   } catch (error) {
     console.error(error);
   }
+  init();
 };
 
 // Function to View All Roles
@@ -334,6 +385,50 @@ async function getDepartments() {
   } catch (error) {
     console.error(error);
     return [];
+  }
+};
+
+// Helper function to Update Employee Role
+async function updateEmployeeRole(employeeId, newRoleId) {
+  try {
+    const sql = 'UPDATE employee SET role_id = ? WHERE id = ?';
+    const values = [newRoleId, employeeId];
+    await db.query(sql, values);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// Helper function to Update Employee Salary
+async function updateEmployeeSalary(employeeId, newSalary) {
+  try {
+    const sql = 'UPDATE employee SET salary = ? WHERE id = ?';
+    const values = [newSalary, employeeId];
+    await db.query(sql, values);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// Helper function to Update Employee Department
+async function updateEmployeeDepartment(employeeId, newDepartmentId) {
+  try {
+    const sql = 'UPDATE employee SET department_id = ? WHERE id = ?';
+    const values = [newDepartmentId, employeeId];
+    await db.query(sql, values);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// Helper function to Update Employee Manager
+async function updateEmployeeManager(employeeId, newManagerId) {
+  try {
+    const sql = 'UPDATE employee SET manager_id = ? WHERE id = ?';
+    const values = [newManagerId, employeeId];
+    await db.query(sql, values);
+  } catch (error) {
+    console.error(error);
   }
 };
 
