@@ -23,7 +23,7 @@ In order to use the Employee Tracker Database, it is necessary to have a code ed
 
 3. Verify the installation of npm, which usually comes bundled with Node.js. Execute the command `npm -v` in the integrated terminal to confirm that you have the latest version downloaded. If npm is not installed, run the command `npm i` before continuing to install dependencies.
 
-4. In the server.js file, make sure to update const db to contain you MyDQL Database Credentials. Specifically, replace: `host`, `user`, `password`, and `database` with your necessary information.
+4. In the server.js file, make sure to update `const db` to contain you MySQL Database Credentials. Specifically, replace: `host`, `user`, `password`, and `database` with your necessary information.
 
 ## Usage
 
@@ -42,6 +42,11 @@ The following steps outline the usage of the Employee Tracker Database. Ensure t
 **Department and Role Management:** Organize your workforce by managing departments and roles effortlessly. Add new departments, create roles, and associate employees with specific roles.
 
 ## How to Contribute
+
+Should you have any problems while using the Employee Tracker Database, feel free to open a new issue or submit a pull request through this repository. Your feedback and contributions are welcomed. Please don't hesitate to reach out regarding any concerns, propose improvements, or share suggestions. I look forward to collaborating with you to enhance the Employee Tracker Database.
+
+GitHub Profile: <a href="https://github.com/samanthashleyrose">samanthashleyrose</a><br>
+Email: samantha.rose327@gmail.com
 
 ### Thank you for your interest and support!
 
