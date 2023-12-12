@@ -21,13 +21,13 @@ const options = [
     message: "What would you like to do:",
     name: 'options',
     choices: [
+      'View All Departments',
+      'View All Roles',
       'View All Employees',
+      'Add Department',
+      'Add Role',
       'Add Employee',
       'Update Employee',
-      'View All Roles',
-      'Add Role',
-      'View All Departments',
-      'Add Department',
       'Quit'
     ]
   },
