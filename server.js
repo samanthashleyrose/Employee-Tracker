@@ -33,16 +33,17 @@ const options = [
   },
 ];
 
-let titleDisplayed = true; // Checks if the title has been displayed
+let welcomingTitleDisplayed = true; // Checks if the title has been displayed
+let goodbyeTitleDisplayed = true; // Checks if the title has been displayed
 
 // Function to display header, start inquirer prompts, and call functions associated with users selections
 function init() {
   // Displays Employee Database Header in terminal only if it hasn't been displayed yet
-  if (titleDisplayed) {
+  if (welcomingTitleDisplayed) {
     figlet('Employee Database', function (err, data) {
       // Populates the header
       console.log(data);
-      titleDisplayed = false;
+      welcomingTitleDisplayed = false;
       promptUser();
     });
   } else {
@@ -340,8 +341,14 @@ async function updateEmployee() {
 
 // Quit
 function quit() {
-  console.log('Goodbye!');
-  process.exit();
+  if (goodbyeTitleDisplayed) {
+    figlet('Goodbye!', function (err, data) {
+      // Populates the header
+      console.log(data);
+      titleDisplayed = false;
+      process.exit();
+    });
+  };
 };
 
 //-------------HELPER FUNCTIONS-------------//
