@@ -3,7 +3,7 @@
 
 ## Description
 
-The Employee Tracker Database CLI is a command-line application built with Node.js, Inquirer, and MySQL. This tool is designed to streamline and simplify the management of a company's employee database, providing a user-friendly interface for efficient data handling. The CLI employs Inquirer to create an intuitive and interactive command-line interface, making it easy for users to navigate and perform various operations on the employee database.
+The Employee Tracker Database CLI is a command-line application built with Node.js, Inquirer, and MySQL. This tool is designed to streamline and simplify the management of a company's employee database. The CLI employs Inquirer to create an intuitive and interactive command-line interface, making it easy for users to navigate and perform various operations on the employee database, resulting in efficient data handling.
 
 ## Table of Contents
 
