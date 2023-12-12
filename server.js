@@ -28,6 +28,7 @@ const options = [
       'Add Role',
       'Add Employee',
       'Update Employee',
+      'Delete Employee',
       'Quit'
     ]
   },
@@ -77,6 +78,9 @@ function promptUser() {
           break;
         case 'Update Employee':
           updateEmployee();
+          break;
+        case 'Delete Employee':
+          deleteEmployee();
           break;
         case 'Quit':
           quit();
@@ -337,6 +341,32 @@ async function updateEmployee() {
     console.error(error);
   }
   init();
+};
+
+// Delete Employee
+async function deleteEmployee() {
+  try {
+    const employees = await getEmployees();
+
+    const { employeeToDelete } = await inquirer.prompt([
+      {
+        type: 'list',
+        message: `***CAUTION ALL EMPLOYEE INFORMATION IS DELETED IMMEDIATELY AFTER SELECTION*** If you're sure you'd like to move forward, select the employee you'd like to delete:`,
+        name: 'employeeToDelete',
+        choices: employees,
+      },
+    ]);
+
+    // Delete the employee from the database
+    const sql = 'DELETE FROM employee WHERE id = ?';
+    const values = [employeeToDelete];
+    await db.query(sql, values);
+
+    console.log('Employee successfully deleted!');
+    init();
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 // Quit
