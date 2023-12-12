@@ -33,6 +33,8 @@ The following steps outline the usage of the Employee Tracker Database. Ensure t
 
 2. Any actions labeled 'View' will show you the corresponding table from the employee database. Any actions labeled 'Add/Update' will prompt you to answer additional questions to change the database.
 
+https://github.com/samanthashleyrose/Employee-Tracker/assets/142939966/4f93530b-7a33-46e6-9bde-a2036f9e401d
+
 ## Features
 
 **Database Integration:** Utilizing the power of MySQL, this application connects to your company's database, allowing you to perform CRUD (Create, Read, Update, Delete) operations on employee records with ease.
