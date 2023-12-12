@@ -17,7 +17,7 @@ The Employee Tracker Database CLI is a command-line application built with Node.
 
 In order to use the Employee Tracker Database, it is necessary to have a code editor, such as Visual Studio Code (VSCode), and Node.js installed on your system.
 
-1. Begin by installing Node.js on your computer's terminal/command-line. For detailed installation instructions, vist Node.js.org.
+1. Begin by installing Node.js on your computer's terminal/command-line. For detailed installation instructions, vist <a href="https://nodejs.org/en/">Node.js.org</a>.
 
 2. Initiate the cloning process from the GitHub repository by selecting "Code." Copy the SSH link then execute the `git clone <paste SSH link>` command in your terminal/command-line. Next, open the cloned project in your preferred code editor.
 
