@@ -132,6 +132,12 @@ async function viewAllEmployees() {
     INNER JOIN department ON roles.department_id = department.id`;
     const [results] = await db.query(query);
     console.table(results);
+    // console.table(results.reduce((obj, row) => {
+    //   const {id, ...other} = row;
+    //   obj[id] = {...other};
+    //   console.log(obj);
+    //   return obj
+    // },{}));
     init();
   } catch (error) {
     console.error(error);
@@ -251,7 +257,6 @@ async function addEmployee() {
 
 // Update Employee Role
 async function updateEmployee() {
-  let employeeToUpdate;
 
   try {
     const employees = await getEmployees();
@@ -274,7 +279,7 @@ async function updateEmployee() {
       }
     ];
 
-    const { infoToUpdate } = await inquirer.prompt(questions);
+    const { infoToUpdate, employeeToUpdate } = await inquirer.prompt(questions);
 
     switch (infoToUpdate) {
       // UPDATE EMPLOYEE ROLE
