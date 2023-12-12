@@ -37,11 +37,16 @@ https://github.com/samanthashleyrose/Employee-Tracker/assets/142939966/4f93530b-
 
 ## Features
 
-**Database Integration:** Utilizing the power of MySQL, this application connects to your company's database, allowing you to perform CRUD (Create, Read, Update, Delete) operations on employee records with ease.
 
 **Employee Management:** Efficiently add new employees, view existing employee details, and update information.
 
 **Department and Role Management:** Organize your workforce by managing departments and roles effortlessly. Add new departments, create roles, and associate employees with specific roles.
+
+**Database Integration:** Utilizing the power of MySQL, this application connects to your company's database, allowing you to perform CRUD (Create, Read, Update, Delete) operations on employee records with ease.
+
+** **PROCEED WITH CAUTION WHEN DELETING AN EMPLOYEE** **
+![Employee Deletion Message](./assets/imgs/del-employee-message.png)
+
 
 ## How to Contribute
 
