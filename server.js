@@ -49,6 +49,7 @@ function init() {
     promptUser();
   }
 };
+
 // Function to handle inquirer prompts and user selections
 function promptUser() {
   inquirer
@@ -132,12 +133,6 @@ async function viewAllEmployees() {
     INNER JOIN department ON roles.department_id = department.id`;
     const [results] = await db.query(query);
     console.table(results);
-    // console.table(results.reduce((obj, row) => {
-    //   const {id, ...other} = row;
-    //   obj[id] = {...other};
-    //   console.log(obj);
-    //   return obj
-    // },{}));
     init();
   } catch (error) {
     console.error(error);
@@ -162,7 +157,7 @@ async function addDepartment() {
     const values = [answer.departmentName];
     await db.query(sql, values);
 
-    console.log("Department successfully added");
+    console.log("Department successfully added!");
     init();
   } catch (error) {
     console.error(error);
@@ -199,7 +194,7 @@ async function addRole() {
     const values = [answers.roleTitle, answers.roleSalary, answers.roleDepartment];
     await db.query(sql, values);
 
-    console.log("Role successfully added");
+    console.log("Role successfully added!");
     init();
   } catch (error) {
     console.error(error);
@@ -215,12 +210,12 @@ async function addEmployee() {
     const questions = [
       {
         type: 'input',
-        message: 'Enter employees first name',
+        message: 'Enter employees first name:',
         name: 'firstNameForNewEmployee'
       },
       {
         type: 'input',
-        message: 'Enter employees last name',
+        message: 'Enter employees last name:',
         name: 'lastNameForNewEmployee'
       },
       {
@@ -248,7 +243,7 @@ async function addEmployee() {
     ];
     await db.query(sql, values);
 
-    console.log("Employee successfully added");
+    console.log("Employee successfully added!");
     init();
   } catch (error) {
     console.error(error);
@@ -267,7 +262,7 @@ async function updateEmployee() {
     const questions = [
       {
         type: 'list',
-        message: "Select the employees you'd like to update:",
+        message: "Select the employee you'd like to update:",
         name: 'employeeToUpdate',
         choices: employees
       },
@@ -293,7 +288,7 @@ async function updateEmployee() {
           }
         ]);
         await updateEmployeeRole(employeeToUpdate, newRoleId);
-        console.log('Employee role successfully updated');
+        console.log('Employee role successfully updated!');
         break;
       // UPDATE EMPLOYEE SALARY
       case 'Salary':
@@ -305,7 +300,7 @@ async function updateEmployee() {
           }
         ]);
         await updateEmployeeSalary(employeeToUpdate, newSalary);
-        console.log('Employee salary successfully updated');
+        console.log('Employee salary successfully updated!');
         break;
       // UPDATE EMPLOYEE DEPARTMENT
       case 'Department':
@@ -318,7 +313,7 @@ async function updateEmployee() {
           }
         ]);
         await updateEmployeeDepartment(employeeToUpdate, newDepartmentId);
-        console.log('Employee department successfully updated');
+        console.log('Employee department successfully updated!');
         break;
       // UPDATE EMPLOYEE MANAGER
       case 'Manager':
@@ -331,7 +326,7 @@ async function updateEmployee() {
           }
         ]);
         await updateEmployeeManager(employeeToUpdate, newManagerId);
-        console.log('Employee manager successfully updated');
+        console.log('Employee manager successfully updated!');
         break;
       default:
         console.log('Invalid selection');
