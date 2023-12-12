@@ -33,8 +33,8 @@ const options = [
   },
 ];
 
-let welcomingTitleDisplayed = true; // Checks if the title has been displayed
-let goodbyeTitleDisplayed = true; // Checks if the title has been displayed
+let welcomingTitleDisplayed = true; // Checks if the welcoming title has been displayed
+let goodbyeTitleDisplayed = true; // Checks if the goodbye title has been displayed
 
 // Function to display header, start inquirer prompts, and call functions associated with users selections
 function init() {
