@@ -8,8 +8,6 @@ In order to install inquirer, please use `npm i inquirer@8.2.4.`
 
 Because this application won’t be deployed, you’ll also need to create a walkthrough video that demonstrates its functionality and all of the following acceptance criteria being met. You’ll need to submit a link to the video and add it to the README of your project.
 
-Refer to the Video Submission GuideLinks to an external site. on the Full-Stack Blog for additional guidance on creating a video.
-
 **User Story** <br>
 `AS A business owner`<br>
 `I WANT to be able to view and manage the departments, roles, and employees in my company`<br>
